@@ -16,6 +16,7 @@ public class MyBehaviorTree : MonoBehaviour
     GameObject cult3;
     GameObject flash;
     GameObject vampire;
+    GameObject offscreen;
     bool summonactive;
     float _t = 0f;
 
@@ -23,6 +24,7 @@ public class MyBehaviorTree : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        offscreen = GameObject.FindGameObjectWithTag("offscreen");
         vampire = GameObject.FindGameObjectWithTag("vampire");
         vampire.SetActive(false);
         flash = GameObject.FindGameObjectWithTag("light");
@@ -123,6 +125,11 @@ public class MyBehaviorTree : MonoBehaviour
         Vector3 cubeposition = new Vector3(staff.transform.position.x, 0f, staff.transform.position.z);
         return new Sequence(new LeafInvoke(()=> currentPerson.GetComponent<SteeringController>().Target = (cubeposition)));
     }
+    protected Node RunAway(GameObject currentPerson)
+    {
+        Vector3 cubeposition = new Vector3(offscreen.transform.position.x, 0f, offscreen.transform.position.z);
+        return new Sequence(new LeafInvoke(() => currentPerson.GetComponent<SteeringController>().Target = (cubeposition)));
+    }
     protected Node ParticipantPraise(GameObject currentPerson)
     {
         return new Sequence(currentPerson.GetComponent<BehaviorMecanim>().ST_PlayHandGesture("CLAP", 10000), new LeafWait(1000));
@@ -139,7 +146,7 @@ public class MyBehaviorTree : MonoBehaviour
                 ParticipantPraise(cult2),
                 ParticipantPraise(cult3),
                 //appearance,
-                staffSwap(),
+                //staffSwap(),
                 //create new sequenceshuffle
                 new SequenceParallel(
                         ParticipantFear(cult1),
@@ -148,6 +155,7 @@ public class MyBehaviorTree : MonoBehaviour
                     )
             );
     }
+    /*
     protected Node desummon()
     {
         summonactive = false;
@@ -156,6 +164,7 @@ public class MyBehaviorTree : MonoBehaviour
     {
         summonactive = true;
     }
+    */
     IEnumerator ApproachObj(GameObject cube, Vector3 start, Vector3 end)
     {
         float startTime = Time.time;
