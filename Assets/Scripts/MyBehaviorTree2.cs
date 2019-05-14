@@ -47,27 +47,13 @@ public class MyBehaviorTree2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (summonactive)
-        {
-            //flash
-            flash.GetComponent<Flash>().CameraFlash();
-            //swap in staff and demon models
-            vampire.SetActive(true);
-            staff.SetActive(false);
-
-        }
-        else if(!summonactive)
-        {
-            //have staff active, demon away
-            vampire.SetActive(false);
-            staff.SetActive(true);
-        }
         /*Evil Timer Start*/
         _t += Time.deltaTime;
         if (_t >= 10.0)
         {
             _t = 0f;
             changeCubeColor();
+            summon();
         }
         /*Evil Timer End*/
     }
@@ -80,22 +66,26 @@ public class MyBehaviorTree2 : MonoBehaviour
             MoveCultRoot(), ObjFloats(staff),
             PraiseCultRoot()),
             AssertFearCultRoot(),
+            EveryoneDeadRoot(),
 
         /*DO NOT EDIT END*/
-          /* this.staffSwap(),*/
            startPlayer()
         /*ADD OTHER NODES BELOW LIKE THIS -> , MyNode1(), MyNode2() */   
            );
 
     }
 
-    /*Death Functions (Will Implement Later)*/
+    /*Death Functions*/
 
-    /*protected Node AssertAndDie(GameObject currentPerson)
+    protected Node EveryoneDeadRoot()
     {
-        return new DecoratorLoop(new Sequence(new DecoratorInvert(new DecoratorLoop((new DecoratorInvert(new Sequence(this.CheckDead(currentPerson, cube2)))))),
-                                              currentPerson.GetComponent<BehaviorMecanim>().ST_PlayBodyGesture("DYING",10000)));
+        return new SequenceParallel(Die(cult1), Die(cult2), Die(cult3));
+    }   
+    protected Node Die(GameObject currentPerson)
+    {
+        return new Sequence(currentPerson.GetComponent<BehaviorMecanim>().Node_BodyAnimation("DYING", true));
     }
+    /*
 
     protected Node CheckDead(GameObject p, GameObject cube)
     {
@@ -184,14 +174,13 @@ public class MyBehaviorTree2 : MonoBehaviour
     }
     /*DO NOT EDIT END*/
 
-    /*Demon + Staff Mechanism*/
-    protected Node desummon()
+    /*Demon + Staff Swap*/
+    void summon()
     {
-        return new LeafAssert(() => summonactive = false);
-    }
-    protected Node staffSwap()
-    {
-        return new LeafAssert(()=>summonactive = true);
+        summonactive = true;
+        vampire.SetActive(true);
+        staff.SetActive(false);
+
     }
 
 
