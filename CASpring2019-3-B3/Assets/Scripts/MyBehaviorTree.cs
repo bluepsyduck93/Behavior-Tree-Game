@@ -14,6 +14,8 @@ public class MyBehaviorTree : MonoBehaviour
     GameObject cult1;
     GameObject cult2;
     GameObject cult3;
+    GameObject flash;
+    GameObject vampire;
     bool summonactive;
     float _t = 0f;
 
@@ -21,6 +23,9 @@ public class MyBehaviorTree : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        vampire = GameObject.FindGameObjectWithTag("vampire");
+        vampire.SetActive(false);
+        flash = GameObject.FindGameObjectWithTag("light");
         summonactive = false;
         staff = GameObject.FindGameObjectWithTag("staff");
         cult1 = GameObject.FindGameObjectWithTag("cult1");
@@ -37,11 +42,17 @@ public class MyBehaviorTree : MonoBehaviour
         if (summonactive)
         {
             //flash
+            flash.GetComponent<Flash>().CameraFlash();
             //swap in staff and demon models
+            vampire.SetActive(true);
+            staff.SetActive(false);
+
         }
         else if(!summonactive)
         {
             //have staff active, demon away
+            vampire.SetActive(false);
+            staff.SetActive(true);
         }
     }
     protected Node BuildTreeRoot()
@@ -139,12 +150,11 @@ public class MyBehaviorTree : MonoBehaviour
     }
     protected Node desummon()
     {
-
+        summonactive = false;
     }
     protected Node staffSwap()
     {
-        //flash
-        //staffswap
+        summonactive = true;
     }
     IEnumerator ApproachObj(GameObject cube, Vector3 start, Vector3 end)
     {

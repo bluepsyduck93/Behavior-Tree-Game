@@ -10,6 +10,8 @@ TagManager:
   - cult2
   - cult3
   - staff
+  - light
+  - vampire
   layers:
   - Default
   - TransparentFX

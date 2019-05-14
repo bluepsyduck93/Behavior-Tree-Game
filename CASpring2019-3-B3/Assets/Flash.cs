@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-
 public class Flash : MonoBehaviour
 {
     ///////////////////////////////////////////////////
-    public float flashTimelength = .2f;
+    public float flashTimelength = 0.8f;
     public bool doCameraFlash = false;
 
     ///////////////////////////////////////////////////
@@ -14,6 +14,7 @@ public class Flash : MonoBehaviour
     private bool flashing = false;
 
     ///////////////////////////////////////////////////
+    // Start is called before the first frame update
     void Start()
     {
         flashImage = GetComponent<Image>();
@@ -22,7 +23,7 @@ public class Flash : MonoBehaviour
         flashImage.color = col;
     }
 
-    ///////////////////////////////////////////////////
+    // Update is called once per frame
     void Update()
     {
         if (doCameraFlash && !flashing)
@@ -34,7 +35,6 @@ public class Flash : MonoBehaviour
             doCameraFlash = false;
         }
     }
-
     ///////////////////////////////////////////////////
     public void CameraFlash()
     {
