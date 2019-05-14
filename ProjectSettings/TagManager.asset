@@ -13,6 +13,12 @@ TagManager:
   - light
   - vampire
   - player
+  - NoHighlight
+  - cube
+  - clue1
+  - cube1
+  - cube2
+  - cube3
   layers:
   - Default
   - TransparentFX

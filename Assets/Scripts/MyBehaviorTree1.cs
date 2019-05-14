@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using TreeSharpPlus;
 
-public class MyBehaviorTree : MonoBehaviour
+public class MyBehaviorTree1 : MonoBehaviour
 {
     public GameObject cube1;
     public GameObject cube2;

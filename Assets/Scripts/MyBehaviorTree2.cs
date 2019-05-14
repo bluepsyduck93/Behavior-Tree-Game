@@ -4,7 +4,7 @@ using System.Collections;
 using TreeSharpPlus;
 using RootMotion.FinalIK;
 
-public class MyBehaviorTree : MonoBehaviour
+public class MyBehaviorTree2 : MonoBehaviour
 {
     GameObject staff;
     GameObject cult1;
@@ -14,7 +14,9 @@ public class MyBehaviorTree : MonoBehaviour
     GameObject vampire;
     GameObject player;
     GameObject clue1;
-    GameObject cube;
+    GameObject cube1;
+    GameObject cube2;
+    GameObject cube3;
     bool summonactive;
     bool evil;
     float _t = 0f;
@@ -33,7 +35,9 @@ public class MyBehaviorTree : MonoBehaviour
         cult2 = GameObject.FindGameObjectWithTag("cult2");
         cult3 = GameObject.FindGameObjectWithTag("cult3");
         player = GameObject.FindGameObjectWithTag("player");
-        cube = GameObject.FindGameObjectWithTag("cube");
+        cube1 = GameObject.FindGameObjectWithTag("cube1");
+        cube2 = GameObject.FindGameObjectWithTag("cube2");
+        cube3 = GameObject.FindGameObjectWithTag("cube3");
         clue1 = GameObject.FindGameObjectWithTag("clue1");
         behaviorAgent = new BehaviorAgent(this.BuildTreeRoot());
         BehaviorManager.Instance.Register(behaviorAgent);
@@ -109,16 +113,11 @@ public class MyBehaviorTree : MonoBehaviour
     /*Cultists are Praising Here*/
     protected Node MoveCultRoot()
     {
-        return new SequenceParallel(WalkToObj(cult1), 
-                                                      WalkToObj(cult2), 
-                                                      WalkToObj(cult3));
+        return new SequenceParallel(WalkToObj(cult1), WalkToObj(cult2), WalkToObj(cult3));
     }
     protected Node PraiseCultRoot()
     {
-        return new SequenceParallel(new LeafWait(100),
-                                                      ParticipantPraise(cult1),
-                                                      ParticipantPraise(cult2),
-                                                      ParticipantPraise(cult3));
+        return new SequenceParallel(new LeafWait(100), ParticipantPraise(cult1), ParticipantPraise(cult2), ParticipantPraise(cult3));
     }
     protected Node WalkToObj(GameObject currentPerson)
     {
@@ -158,7 +157,9 @@ public class MyBehaviorTree : MonoBehaviour
     /*Evil Starts Here*/
     void changeCubeColor()
     {
-        cube.transform.GetComponent<Renderer>().material.color = Color.red;
+        cube1.transform.GetComponent<Renderer>().material.color = Color.red;
+        cube2.transform.GetComponent<Renderer>().material.color = Color.red;
+        cube3.transform.GetComponent<Renderer>().material.color = Color.red;
 
         evil = true;
     }
