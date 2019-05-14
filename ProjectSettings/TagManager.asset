@@ -19,6 +19,7 @@ TagManager:
   - cube1
   - cube2
   - cube3
+  - offscreen
   layers:
   - Default
   - TransparentFX

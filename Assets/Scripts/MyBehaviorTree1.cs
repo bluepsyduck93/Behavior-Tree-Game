@@ -41,16 +41,20 @@ public class MyBehaviorTree1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+    void _summon()
+    {
+        //flash
+        flash.GetComponent<Flash>().doCameraFlash = true;
         if (summonactive)
         {
-            //flash
-            flash.GetComponent<Flash>().CameraFlash();
             //swap in staff and demon models
             vampire.SetActive(true);
             staff.SetActive(false);
 
         }
-        else if(!summonactive)
+        else if (!summonactive)
         {
             //have staff active, demon away
             vampire.SetActive(false);
@@ -61,21 +65,22 @@ public class MyBehaviorTree1 : MonoBehaviour
     {
         return new DecoratorLoop(
                 new Sequence(
-                    this.MoveCultRoot()
+                    this.MoveCultRoot(),
+                    this.summon(cult1, cult2, cult3)
                 )
             );
     }
     protected Node AssertAndDie(GameObject currentPerson)
     {
         return new DecoratorLoop(new Sequence(new DecoratorInvert(new DecoratorLoop((new DecoratorInvert(new Sequence(this.CheckDead(currentPerson, cube2)))))),
-                                              currentPerson.GetComponent<BehaviorMecanim>().ST_PlayBodyGesture("DYING",10000)));
+                                              currentPerson.GetComponent<BehaviorMecanim>().ST_PlayBodyGesture("DYING", 10000)));
     }
 
     protected Node CheckDead(GameObject p, GameObject cube)
     {
         Val<Vector3> ppos = Val.V(() => p.transform.position);
         Val<Vector3> cubepos = Val.V(() => cube.transform.position);
-        Val<Vector3> diffpos = Val.V(() => ppos.Value-cubepos.Value);
+        Val<Vector3> diffpos = Val.V(() => ppos.Value - cubepos.Value);
         Val<float> distaway = Val.V(() => ppos.Value.sqrMagnitude);
         return new LeafAssert(() => (distaway.Value < 5.0));
 
@@ -86,8 +91,8 @@ public class MyBehaviorTree1 : MonoBehaviour
     {
         return new DecoratorLoop(new DecoratorInvert(
                                  new DecoratorLoop(
-                                (new SequenceParallel(WalkToCube(cult1), 
-                                                      WalkToCube(cult2), 
+                                (new SequenceParallel(WalkToCube(cult1),
+                                                      WalkToCube(cult2),
                                                       WalkToCube(cult3))))));
     }
     protected Node PraiseCultRoot()
@@ -97,7 +102,7 @@ public class MyBehaviorTree1 : MonoBehaviour
                                                       ParticipantPraise(cult2),
                                                       ParticipantPraise(cult3));
     }
-    
+
     protected Node FearCultRoot()
     {
         return new DecoratorLoop(new DecoratorInvert(
@@ -112,9 +117,9 @@ public class MyBehaviorTree1 : MonoBehaviour
     {
         Vector3 lowestPosition = cube.transform.position;
 
-        Vector3 highestPosition = lowestPosition + new Vector3 (0, 3, 0);
+        Vector3 highestPosition = lowestPosition + new Vector3(0, 3, 0);
 
-        return new DecoratorLoop(new Sequence(new LeafInvoke(()=> StartCoroutine(ApproachObj(cube1,lowestPosition, highestPosition))),
+        return new DecoratorLoop(new Sequence(new LeafInvoke(() => StartCoroutine(ApproachObj(cube1, lowestPosition, highestPosition))),
                                               new LeafWait(10500),
                                               new LeafInvoke(() => StartCoroutine(ApproachObj(cube1, highestPosition, lowestPosition))),
                                               new LeafWait(10500)));
@@ -123,7 +128,7 @@ public class MyBehaviorTree1 : MonoBehaviour
     protected Node WalkToCube(GameObject currentPerson)
     {
         Vector3 cubeposition = new Vector3(staff.transform.position.x, 0f, staff.transform.position.z);
-        return new Sequence(new LeafInvoke(()=> currentPerson.GetComponent<SteeringController>().Target = (cubeposition)));
+        return new Sequence(new LeafInvoke(() => currentPerson.GetComponent<SteeringController>().Target = (cubeposition)));
     }
     protected Node RunAway(GameObject currentPerson)
     {
@@ -146,7 +151,7 @@ public class MyBehaviorTree1 : MonoBehaviour
                 ParticipantPraise(cult2),
                 ParticipantPraise(cult3),
                 //appearance,
-                //staffSwap(),
+                staffSwap(),
                 //create new sequenceshuffle
                 new SequenceParallel(
                         ParticipantFear(cult1),
@@ -160,21 +165,23 @@ public class MyBehaviorTree1 : MonoBehaviour
     {
         summonactive = false;
     }
+    */
     protected Node staffSwap()
     {
-        summonactive = true;
+        _summon();
+        return new LeafAssert(() => true);
     }
-    */
+
     IEnumerator ApproachObj(GameObject cube, Vector3 start, Vector3 end)
     {
         float startTime = Time.time;
         while (Time.time < startTime + 10f)
         {
-            cube.transform.position = Vector3.Lerp(start, end, (Time.time - startTime)/10f);
+            cube.transform.position = Vector3.Lerp(start, end, (Time.time - startTime) / 10f);
             yield return null;
         }
         cube.transform.position = end;
-        
+
 
     }
 
