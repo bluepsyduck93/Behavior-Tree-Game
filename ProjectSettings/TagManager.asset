@@ -12,6 +12,7 @@ TagManager:
   - staff
   - light
   - vampire
+  - player
   layers:
   - Default
   - TransparentFX
