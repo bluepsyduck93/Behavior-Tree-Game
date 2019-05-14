@@ -66,10 +66,10 @@ public class MyBehaviorTree2 : MonoBehaviour
             MoveCultRoot(), ObjFloats(staff),
             PraiseCultRoot()),
             AssertFearCultRoot(),
-            EveryoneDeadRoot(),
+            EveryoneDeadRoot()
 
         /*DO NOT EDIT END*/
-           startPlayer()
+          /* startPlayer()
         /*ADD OTHER NODES BELOW LIKE THIS -> , MyNode1(), MyNode2() */   
            );
 
@@ -183,7 +183,7 @@ public class MyBehaviorTree2 : MonoBehaviour
 
     }
 
-
+    /*
     protected Node startPlayer()
     {
         return new Sequence(playerPickUp());
@@ -191,12 +191,9 @@ public class MyBehaviorTree2 : MonoBehaviour
    protected Node playerPickUp()
     {
         Vector3 clueposition = new Vector3(clue1.transform.position.x, clue1.transform.position.y, clue1.transform.position.z);
-        Val<InteractionObject> clue = Val.V(() => { return this.clue1.GetComponent<InteractionObject>(); });
-        Val<FullBodyBipedEffector> right = FullBodyBipedEffector.RightHand;
 
-       return new Sequence(player.GetComponent<BehaviorMecanim>().Node_GoToUpToRadius(clueposition, 1.0f)
-           /*,
-           player.GetComponent<BehaviorMecanim>().Node_StartInteraction(right, clue)*/);
-    }
+
+            return new Sequence(player.GetComponent<BehaviorMecanim>().Node_GoToUpToRadius(clueposition, 1.0f));
+    }*/
 
 }

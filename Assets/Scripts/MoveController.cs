@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeController : MonoBehaviour
+public class MoveController : MonoBehaviour
 {
     private Rigidbody rb;
     [SerializeField]
