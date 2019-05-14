@@ -17,7 +17,7 @@ public class Flash : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        flashImage = GetComponent<Image>();
+        flashImage = this.GetComponent<Image>();
         Color col = flashImage.color;
         col.a = 0.0f;
         flashImage.color = col;
