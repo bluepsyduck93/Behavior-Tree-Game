@@ -64,8 +64,8 @@ public class GameController : MonoBehaviour
     {
         if (ClueController.Clue1 && ClueController.Clue2 && ClueController.Clue3)
         {
-            winText = "User Won";
-            gameover = true;
+
+            Application.Quit();
         }
     }
 }
