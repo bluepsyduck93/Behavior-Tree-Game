@@ -418,9 +418,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   winText: User Wins!
-  clue1: {fileID: 0}
-  clue2: {fileID: 0}
-  clue3: {fileID: 0}
+  clue1: {fileID: 2136120411}
+  clue2: {fileID: 2031782092}
+  clue3: {fileID: 545138500}
 --- !u!4 &199147647
 Transform:
   m_ObjectHideFlags: 0
@@ -4658,7 +4658,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   effectorType: 6
-  multipliers: []
+  multipliers:
+  - curve: 6
+    multiplier: 1
   interactionSpeedMlp: 1
   pivot: {fileID: 0}
   twistAxis: {x: 0, y: 1, z: 0}
@@ -5196,6 +5198,18 @@ MonoBehaviour:
   fadeInTime: 0.3
   speed: 1
   resetToDefaultsSpeed: 1
+--- !u!114 &1891584984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891584980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9745e5ed790bc2469887f42a87c88cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &1891584996
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5934,7 +5948,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136120411}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.415, y: 1.346, z: -21.663}
+  m_LocalPosition: {x: 17.054, y: 1.425, z: -22.796}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 1823260451}
