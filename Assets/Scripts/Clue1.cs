@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TreeSharpPlus;
 using RootMotion.FinalIK;
 
 public class Clue1 : MonoBehaviour
@@ -9,6 +10,7 @@ public class Clue1 : MonoBehaviour
     public InteractionObject clue;
 
     public GameObject pickup;
+    public GameObject player;
 
     [SerializeField]
     public InteractionSystem pIS;
@@ -28,8 +30,12 @@ public class Clue1 : MonoBehaviour
     private void OnGUI()
     {
 
+        Val<Vector3> playerpos = Val.V(() => player.transform.position);
+        Val<Vector3> cluepos = Val.V(() => pickup.transform.position);
+        Val<Vector3> diffpos = Val.V(() => playerpos.Value - cluepos.Value);
+        Val<float> distaway = Val.V(() => diffpos.Value.sqrMagnitude); 
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && distaway.Value < 2.0)
         {
 
             pIS.StartInteraction(FullBodyBipedEffector.RightHand, clue, false);

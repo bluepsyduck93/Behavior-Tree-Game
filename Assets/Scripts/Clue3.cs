@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TreeSharpPlus;
 using RootMotion.FinalIK;
 
 public class Clue3 : MonoBehaviour
@@ -13,6 +14,7 @@ public class Clue3 : MonoBehaviour
     [SerializeField]
     public InteractionSystem pIS;
 
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +30,12 @@ public class Clue3 : MonoBehaviour
     private void OnGUI()
     {
 
-        if (Input.GetKeyDown(KeyCode.E))
+        Val<Vector3> playerpos = Val.V(() => player.transform.position);
+        Val<Vector3> cluepos = Val.V(() => pickup.transform.position);
+        Val<Vector3> diffpos = Val.V(() => playerpos.Value - cluepos.Value);
+        Val<float> distaway = Val.V(() => diffpos.Value.sqrMagnitude);
+
+        if (Input.GetKeyDown(KeyCode.E) && distaway.Value < 2.0)
         {
 
             pIS.StartInteraction(FullBodyBipedEffector.RightHand, clue, false);
