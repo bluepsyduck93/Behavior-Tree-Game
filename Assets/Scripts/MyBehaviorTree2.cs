@@ -3,6 +3,8 @@ using System;
 using System.Collections;
 using TreeSharpPlus;
 using RootMotion.FinalIK;
+using UnityEngine.SceneManagement;
+
 
 public class MyBehaviorTree2 : MonoBehaviour
 {
@@ -25,12 +27,14 @@ public class MyBehaviorTree2 : MonoBehaviour
     GameObject cube3;
     bool summonactive;
     bool evil;
+
     float _t = 0f;
 
     private BehaviorAgent behaviorAgent;
     // Use this for initialization
     void Start()
     {
+
         /*Intializing the game Objects*/
         vampire = GameObject.FindGameObjectWithTag("vampire");
         vampire.SetActive(false);
@@ -44,9 +48,9 @@ public class MyBehaviorTree2 : MonoBehaviour
         cube1 = GameObject.FindGameObjectWithTag("cube1");
         cube2 = GameObject.FindGameObjectWithTag("cube2");
         cube3 = GameObject.FindGameObjectWithTag("cube3");
-      /*  behaviorAgent = new BehaviorAgent(this.BuildTreeRoot());
+        behaviorAgent = new BehaviorAgent(this.BuildTreeRoot());
         BehaviorManager.Instance.Register(behaviorAgent);
-        behaviorAgent.StartBehavior();*/
+        behaviorAgent.StartBehavior();
     }
 
     // Update is called once per frame
@@ -62,6 +66,7 @@ public class MyBehaviorTree2 : MonoBehaviour
         }
         /*Evil Timer End*/
     }
+
     protected Node BuildTreeRoot()
     {
         /*DO NOT EDIT START*/
@@ -69,9 +74,11 @@ public class MyBehaviorTree2 : MonoBehaviour
             new Sequence(
             new SequenceParallel(MoveCultRoot(), ObjFloats(staff), PraiseCultRoot()),
             AssertFearCultRoot(),
-            EveryoneDeadRoot()
+            EveryoneDeadRoot(),
 
         /*DO NOT EDIT END*/
+
+            ChasePlayer()
         /*ADD OTHER NODES BELOW LIKE THIS -> , MyNode1(), MyNode2() */   
            );
 
@@ -174,7 +181,7 @@ public class MyBehaviorTree2 : MonoBehaviour
     {
         return new Sequence(currentPerson.GetComponent<BehaviorMecanim>().ST_PlayGesture("DUCK", AnimationLayer.Body, 10000));
     }
-    /*DO NOT EDIT END*/
+
 
     /*Demon + Staff Swap*/
     void summon()
@@ -185,12 +192,20 @@ public class MyBehaviorTree2 : MonoBehaviour
 
     }
 
+    protected Node ChasePlayer()
+    {
+        Vector3 playerposition = new Vector3(player.transform.position.x, 0f, player.transform.position.z);
+        return new Sequence(vampire.GetComponent<BehaviorMecanim>().Node_GoToUpToRadius(playerposition, 1.0f));
+    }
+
     /*
+     * 
 
     protected Node startPlayer()
     {
         return RunStatus.Success
     }
     */
+    /*DO NOT EDIT END*/
 
 }
