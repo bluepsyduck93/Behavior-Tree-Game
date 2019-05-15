@@ -64,6 +64,7 @@ public class MyBehaviorTree2 : MonoBehaviour
             new Sequence(
             new SequenceParallel(
             MoveCultRoot(), ObjFloats(staff),
+            VampireFalls(vampire),
             PraiseCultRoot()),
             AssertFearCultRoot(),
             EveryoneDeadRoot()
@@ -124,13 +125,21 @@ public class MyBehaviorTree2 : MonoBehaviour
     {
         Vector3 lowestPosition = obj.transform.position;
 
-        Vector3 highestPosition = lowestPosition + new Vector3 (0, 3, 0);
+        Vector3 highestPosition = lowestPosition + new Vector3 (0,3, 0);
 
         return new Sequence(new LeafInvoke(()=> StartCoroutine(ApproachObj(obj,lowestPosition, highestPosition))),
                                               new LeafWait(1000),
                                               new LeafInvoke(() => StartCoroutine(ApproachObj(obj, highestPosition, lowestPosition))),
                                               new LeafWait(1000));
 
+    }
+    protected Node VampireFalls(GameObject obj) {
+        Vector3 lowestPosition = obj.transform.position;
+        Vector3 highestPosition = lowestPosition + new Vector3(0, 30, 0);
+        return new Sequence(new LeafInvoke(() => StartCoroutine(ApproachObj(obj, highestPosition, lowestPosition))),
+                                              new LeafWait(1000), 
+                                              new LeafInvoke(() => StartCoroutine(ApproachObj(obj, highestPosition, lowestPosition))),
+                                              new LeafWait(1000));
     }
     IEnumerator ApproachObj(GameObject obj, Vector3 start, Vector3 end)
     {
@@ -144,6 +153,7 @@ public class MyBehaviorTree2 : MonoBehaviour
 
 
     }
+  
     /*Evil Starts Here*/
     void changeCubeColor()
     {
