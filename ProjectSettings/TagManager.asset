@@ -20,6 +20,8 @@ TagManager:
   - cube2
   - cube3
   - offscreen
+  - clue2
+  - clue3
   layers:
   - Default
   - TransparentFX
