@@ -6,6 +6,13 @@ using RootMotion.FinalIK;
 
 public class MyBehaviorTree2 : MonoBehaviour
 {
+    [SerializeField]
+    public FullBodyBipedIK pIK;
+    [SerializeField]
+    public InteractionObject clue1;
+    [SerializeField]
+    public InteractionSystem pIS;
+
     GameObject staff;
     GameObject cult1;
     GameObject cult2;
@@ -13,7 +20,6 @@ public class MyBehaviorTree2 : MonoBehaviour
     GameObject flash;
     GameObject vampire;
     GameObject player;
-    GameObject clue1;
     GameObject cube1;
     GameObject cube2;
     GameObject cube3;
@@ -38,10 +44,9 @@ public class MyBehaviorTree2 : MonoBehaviour
         cube1 = GameObject.FindGameObjectWithTag("cube1");
         cube2 = GameObject.FindGameObjectWithTag("cube2");
         cube3 = GameObject.FindGameObjectWithTag("cube3");
-        clue1 = GameObject.FindGameObjectWithTag("clue1");
-        behaviorAgent = new BehaviorAgent(this.BuildTreeRoot());
+      /*  behaviorAgent = new BehaviorAgent(this.BuildTreeRoot());
         BehaviorManager.Instance.Register(behaviorAgent);
-        behaviorAgent.StartBehavior();
+        behaviorAgent.StartBehavior();*/
     }
 
     // Update is called once per frame
@@ -62,14 +67,11 @@ public class MyBehaviorTree2 : MonoBehaviour
         /*DO NOT EDIT START*/
         return
             new Sequence(
-            new SequenceParallel(
-            MoveCultRoot(), ObjFloats(staff),
-            PraiseCultRoot()),
+            new SequenceParallel(MoveCultRoot(), ObjFloats(staff), PraiseCultRoot()),
             AssertFearCultRoot(),
             EveryoneDeadRoot()
 
         /*DO NOT EDIT END*/
-          /* startPlayer()
         /*ADD OTHER NODES BELOW LIKE THIS -> , MyNode1(), MyNode2() */   
            );
 
@@ -184,16 +186,11 @@ public class MyBehaviorTree2 : MonoBehaviour
     }
 
     /*
+
     protected Node startPlayer()
     {
-        return new Sequence(playerPickUp());
+        return RunStatus.Success
     }
-   protected Node playerPickUp()
-    {
-        Vector3 clueposition = new Vector3(clue1.transform.position.x, clue1.transform.position.y, clue1.transform.position.z);
-
-
-            return new Sequence(player.GetComponent<BehaviorMecanim>().Node_GoToUpToRadius(clueposition, 1.0f));
-    }*/
+    */
 
 }
