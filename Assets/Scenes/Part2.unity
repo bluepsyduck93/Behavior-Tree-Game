@@ -1012,6 +1012,7 @@ MonoBehaviour:
   clue: {fileID: 545138503}
   pickup: {fileID: 545138500}
   pIS: {fileID: 1891584983}
+  player: {fileID: 1891584980}
 --- !u!114 &545138503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4270,9 +4271,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98dcf5f83828024fafda903ca49a9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pIK: {fileID: 0}
-  clue1: {fileID: 0}
-  pIS: {fileID: 0}
 --- !u!114 &1646217675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5597,6 +5595,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clue: {fileID: 2031782095}
   pickup: {fileID: 2031782092}
+  player: {fileID: 1891584980}
   pIS: {fileID: 1891584983}
 --- !u!114 &2031782095
 MonoBehaviour:
@@ -6087,6 +6086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clue: {fileID: 2136120412}
   pickup: {fileID: 2136120411}
+  player: {fileID: 1891584980}
   pIS: {fileID: 1891584983}
 --- !u!1 &2146948669
 GameObject:
