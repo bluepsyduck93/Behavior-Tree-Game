@@ -1024,8 +1024,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f425a4a83914b04af3f1642c000f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weightCurves: []
-  multipliers: []
+  weightCurves:
+  - type: 0
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.002357483
+        inSlope: 2.0291033
+        outSlope: 2.0291033
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.49166667
+        value: 1
+        inSlope: -0
+        outSlope: -0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.46610174
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9833374
+        value: -0.009433746
+        inSlope: -2.0530686
+        outSlope: -2.0530686
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  multipliers:
+  - curve: 0
+    multiplier: 1
+    result: 7
   otherLookAtTarget: {fileID: 0}
   otherTargetsRoot: {fileID: 0}
   pickUpOnTrigger: 1
@@ -2837,13 +2874,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946087707}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.839, y: 1.02, z: -28.98}
+  m_LocalRotation: {x: 0.2164396, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 15.96, y: 2.93, z: -25.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25, y: 0, z: 0}
 --- !u!114 &946087711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2853,9 +2890,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 946087707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d976a5ab110ea0041a2b6f5ac8650379, type: 3}
+  m_Script: {fileID: 11500000, guid: d3a231f847e259341b83446396ab94fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1891584980}
 --- !u!1 &978123677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4666,7 +4704,7 @@ MonoBehaviour:
   twistAxis: {x: 0, y: 1, z: 0}
   twistWeight: 1
   swingWeight: 0
-  rotateOnce: 1
+  rotateOnce: 0
 --- !u!1 &1870594147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5210,6 +5248,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9745e5ed790bc2469887f42a87c88cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_MovingTurnSpeed: 360
+  m_StationaryTurnSpeed: 180
+  m_JumpPower: 6
+  m_GravityMultiplier: 2
+  m_RunCycleLegOffset: 0.2
+  m_MoveSpeedMultiplier: 1
+  m_AnimSpeedMultiplier: 1
+  m_GroundCheckDistance: 0.2
+--- !u!114 &1891584985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891584980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be57a08c1895d04498879e249764e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 946087709}
+  agent: {fileID: 1891584992}
+  character: {fileID: 1891584984}
+--- !u!195 &1891584992 stripped
+NavMeshAgent:
+  m_CorrespondingSourceObject: {fileID: 1889150796, guid: 10bc2f28a2d656c469c44177375aaf32,
+    type: 3}
+  m_PrefabInstance: {fileID: 849030764}
+  m_PrefabAsset: {fileID: 0}
 --- !u!136 &1891584996
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5236,10 +5303,24 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1891584999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1891584980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc0304f5a703416ebff81ad105ddf18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionObject: {fileID: 2136120412}
+  effectors: 06000000
 --- !u!1 &1918604328
 GameObject:
   m_ObjectHideFlags: 0
@@ -5529,8 +5610,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f425a4a83914b04af3f1642c000f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weightCurves: []
-  multipliers: []
+  weightCurves:
+  - type: 0
+    curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.002357483
+        inSlope: 2.0291033
+        outSlope: 2.0291033
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.49166667
+        value: 1
+        inSlope: -0
+        outSlope: -0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.46610174
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9833374
+        value: -0.009433746
+        inSlope: -2.0530686
+        outSlope: -2.0530686
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+  multipliers:
+  - curve: 0
+    multiplier: 1
+    result: 7
   otherLookAtTarget: {fileID: 0}
   otherTargetsRoot: {fileID: 0}
   pickUpOnTrigger: 1
@@ -5866,7 +5984,7 @@ MonoBehaviour:
   otherLookAtTarget: {fileID: 0}
   otherTargetsRoot: {fileID: 0}
   pickUpOnTrigger: 1
-  pauseOnTrigger: 1
+  pauseOnTrigger: 0
   triggerTime: 0.3
   releaseTime: 0.6
   onStartAnimation:
